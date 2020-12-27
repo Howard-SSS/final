@@ -13,7 +13,7 @@ public interface UserService {
 
     Store findByColumn(String column,String value);
 
-    void insertRow(String phone,String user,String password);
+    void insertRow(String phone,String name,String password);
 
     void deleteByPhone(@Param("phone") String phone);
 

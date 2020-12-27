@@ -17,14 +17,6 @@ public class StoreController {
     @Resource
     StoreService storeService;
 
-    @RequestMapping("/toLogin")
-    public String toLogin(){
-        return "login";
-    }
-    @RequestMapping("/toIndex")
-    public String toIndex(){
-        return "index";
-    }
     @RequestMapping("/toManage")
     public String toManage(){
         return "manage";

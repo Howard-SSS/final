@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.UserDao">
+    <parameterMap id="userParameterMap" type="com.example.demo.model.User">
+        <parameter property="phone" jdbcType="VARCHAR"/>
+        <parameter property="name" jdbcType="VARCHAR"/>
+        <parameter property="password" jdbcType="VARCHAR"/>
+    </parameterMap>
+    <insert id="insertUser" parameterType="String">
+        insert into user (phone,name,password)
+        values (#{phone},#{name},#{password})
+    </insert>
+</mapper>
