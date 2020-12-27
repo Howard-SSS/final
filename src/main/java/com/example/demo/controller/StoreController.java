@@ -55,5 +55,4 @@ public class StoreController {
     public String  toSavePage(Model model){
         return "save";
     }
-
 }

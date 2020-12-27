@@ -1,16 +1,27 @@
 package com.example.demo.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.example.demo.model.Store;
 import com.example.demo.model.User;
+import com.example.demo.service.StoreService;
 import com.example.demo.service.UserService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Controller
 public class UserController {
+    @Resource
+    StoreService storeService;
     @Resource
     UserService userService;
 
@@ -20,7 +31,13 @@ public class UserController {
     }
 
     @RequestMapping("/toIndex")
-    public String toIndex(){
+    public String toIndex(@RequestParam("index") int index,Model model){
+        long num=storeService.count();
+        long page= num/12+1;
+        PageRequest pageRequest=PageRequest.of(index, 12);
+        Page<Store> list=storeService.findAll(pageRequest);
+        model.addAttribute("list",list);
+        model.addAttribute("page",page);
         return "index";
     }
 

@@ -7,6 +7,8 @@ import com.example.demo.repository.StoreRepository;
 import com.example.demo.service.StoreService;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -37,6 +39,16 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public boolean existsById(String fid) {
         return storeRepository.existsById(fid);
+    }
+
+    @Override
+    public Page<Store> findAll(Pageable pageable) {
+        return storeRepository.findAll(pageable);
+    }
+
+    @Override
+    public long count() {
+        return storeRepository.count();
     }
 
     @Override

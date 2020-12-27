@@ -5,13 +5,14 @@
 	<title>商城</title>
 	<link rel="stylesheet" type="text/css" href="../static/css/index.css" th:href="@{/css/index.css}">
 	<script type="text/javascript" src="../static/js/index.js" th:src="@{/js/index.js}" ></script>
+	<script type="text/javascript" src="../static/layui/layui.js" th:src="@{/layui/layui.js}"></script>
 </head>
 <body>
 	<!-- --------------------页眉板块-------------------- -->
 	<div class="header">
 		<!-- 设置logo -->
 		<div class="logo">
-			<img src="../static/images/logo.png" th:src="@{/static/images/logo.png}">
+			<img src="../static/images/logo.png" th:src="@{/images/logo.png}">
 		</div>
 		<!-- 设置菜单 -->
 		<div class="menu" onmouseleave="show_menu1()">  
@@ -34,101 +35,35 @@
 	<div class="content">
 		<!-- 设置广告栏 -->
 		<div class="banner">
-			<img src="../static/images/welcome.png" class="banner_img" th:src="@{/static/images/welcome.png}">
+			<img src="../static/images/welcome.png" class="banner_img" th:src="@{/images/welcome.png}">
 		</div>
 		<div class="img_content">
-			<ul>
+			<ul th:each="l:${list}">
 				<li>
-					<img src="../static/images/show.jpg" class="img_li" th:src="@{/static/images/show.jpg}">
+					<img style="width: 360px;height: 240px" src="../static/images/show.jpg" th:src="@{/images/{imgname}(imgname=${l.picture})}">
 					<div class="info">
-						<h3>show</h3>
-						<p>
-							图片描述可以分为多种，这里是一个关于展示的板块，这里是一个关于展示的板块，这里是一个关于展示的板块，这里是一个关于展示的板块，这里是一个关于展示的板块
-						</p>
-						<div class="img_btn"> 
-							<!-- 价格，购买logo -->
-							<div class="price">¥ 2300</div>
-						</div>
-					</div>
-				</li>
-
-				<li>
-					<img src="../static/images/show.jpg" class="img_li" th:src="@{/static/images/show.jpg}">
-					<div class="info">
-						<h3>show</h3>
-						<p>
-							图片描述可以分为多种，这里是一个关于展示的板块，这里是一个关于展示的板块，这里是一个关于展示的板块，这里是一个关于展示的板块，这里是一个关于展示的板块
-						</p>
-						<div class="img_btn"> 
-							<!-- 价格，购买logo -->
-							<div class="price">¥ 2300</div>
-						
-						</div>
-					</div>
-				</li>
-
-				<li>
-					<img src="../static/images/show.jpg" class="img_li" th:src="@{/static/images/show.jpg}">
-					<div class="info">
-						<h3>show</h3>
-						<p>
-							图片描述可以分为多种，这里是一个关于展示的板块，这里是一个关于展示的板块，这里是一个关于展示的板块，这里是一个关于展示的板块，这里是一个关于展示的板块
-						</p>
-						<div class="img_btn"> 
-							<!-- 价格，购买logo -->
-							<div class="price">¥ 2300</div>
-							
-						</div>
-					</div>
-				</li>
-
-				<li>
-					<img src="../static/images/show.jpg" class="img_li" th:src="@{/static/images/show.jpg}">
-					<div class="info">
-						<h3>show</h3>
-						<p>
-							图片描述可以分为多种，这里是一个关于展示的板块，这里是一个关于展示的板块，这里是一个关于展示的板块，这里是一个关于展示的板块，这里是一个关于展示的板块
-						</p>
-						<div class="img_btn"> 
-							<!-- 价格，购买logo -->
-							<div class="price">¥ 2300</div>
-						</div>
-					</div>
-				</li>
-
-				<li>
-					<img src="../static/images/show.jpg" class="img_li" th:src="@{/static/images/show.jpg}">
-					<div class="info">
-						<h3>show</h3>
-						<p>
-							图片描述可以分为多种，这里是一个关于展示的板块，这里是一个关于展示的板块，这里是一个关于展示的板块，这里是一个关于展示的板块，这里是一个关于展示的板块
-						</p>
-						<div class="img_btn"> 
-							<!-- 价格，购买logo -->
-							<div class="price">¥ 2300</div>
-						</div>
-					</div>
-				</li>
-
-				<li>
-					<img src="../static/images/show.jpg" class="img_li" th:src="@{/static/images/show.jpg}">
-					<div class="info">
-						<h3>show</h3>
-						<p>
-							图片描述可以分为多种，这里是一个关于展示的板块，这里是一个关于展示的板块，这里是一个关于展示的板块，这里是一个关于展示的板块，这里是一个关于展示的板块
-						</p>
-						<div class="img_btn"> 
-							<!-- 价格，购买logo -->
-							<div class="price">¥ 2300</div>
-							
+						<h3 th:text="${l.name}"></h3>
+						<p th:text="${l.introduce}"></p>
+						<div class="img_btn">
+							<div class="price" th:text="${l.address}"></div>
 						</div>
 					</div>
 				</li>
 			</ul>
-			
 		</div>
 		<!-- 分页 -->
 		<div class="page_nav">
+			<script>
+				layui.use('laypage', function(){
+					var laypage = layui.laypage;
+
+					//执行一个laypage实例
+					laypage.render({
+						elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+						,count: 50 //数据总数，从服务端得到
+					});
+				});
+			</script>
 			<ul>
 				<li><a href="#">首页</a></li>
 				<li><a href="#">上一页</a></li>
@@ -140,9 +75,6 @@
 				<li><a href="#">4</a></li>
 				<li><a href="#">5</a></li>
 				<li><a href="#">...</a></li>
-				<li><a href="#">98</a></li>
-				<li><a href="#">99</a></li>
-
 				<li><a href="#">下一页</a></li>
 				<li><a href="#">尾页</a></li>
 			</ul>
