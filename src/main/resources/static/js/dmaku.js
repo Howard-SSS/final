@@ -1,20 +1,21 @@
 function cambiar_login() {
   document.querySelector('.cont_forms').className = "cont_forms cont_forms_active_login";  
-  document.querySelector('.cont_form_login').style.display = "block";
-  document.querySelector('.cont_form_sign_up').style.opacity = "0";
+document.querySelector('.cont_form_login').style.display = "block";
+document.querySelector('.cont_form_sign_up').style.opacity = "0";               
 
-  setTimeout(function(){  document.querySelector('.cont_form_login').style.opacity = "1"; },400);
+setTimeout(function(){  document.querySelector('.cont_form_login').style.opacity = "1"; },400);  
+  
+setTimeout(function(){    
+document.querySelector('.cont_form_sign_up').style.display = "none";
+},200);
 
-  setTimeout(function(){
-  document.querySelector('.cont_form_sign_up').style.display = "none";
-  },200);
-}
 
-function cambiar_sign_up() {
-  console.log(123);
-  var json=JSON.stringify({});
+  var json=JSON.stringify({
+    'apple':'a',
+    'ba':'b'
+  });
   $.ajax({
-    url:'/register',
+    url:'/login',
     type:'post',
     data:{
       'json':json
@@ -26,17 +27,38 @@ function cambiar_sign_up() {
 
     }
   });
+
+  }
+function toReg() {
   document.querySelector('.cont_forms').className = "cont_forms cont_forms_active_sign_up";
   document.querySelector('.cont_form_sign_up').style.display = "block";
   document.querySelector('.cont_form_login').style.opacity = "0";
-  
+
   setTimeout(function(){  document.querySelector('.cont_form_sign_up').style.opacity = "1";
   },100);
 
   setTimeout(function(){   document.querySelector('.cont_form_login').style.display = "none";
   },400);
+}
+function cambiar_sign_up(phone,user,password) {
+  var json=JSON.stringify({
+    "phone":phone,
+    "user":user,
+    "password":password
+  });
+  $.ajax({
+    url:'/register',
+    type:'post',
+    data:{
+      'json':json
+    },
+    success:function () {
+      console.log(123);
+    },
+    error:function () {
 
-
+    }
+  });
 }    
 
 

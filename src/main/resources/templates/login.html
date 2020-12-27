@@ -28,7 +28,7 @@
           <div class="cont_ba_opcitiy">
             <h2>注册</h2>
             <p>还没有账号？免费注册！</p>
-            <button class="btn_sign_up" onclick="cambiar_sign_up()">注册</button>
+            <button class="btn_sign_up" onclick="toReg()">注册</button>
           </div>
         </div>
       </div>
@@ -45,11 +45,13 @@
         </div>
         <div class="cont_form_sign_up"> <a href="#" onclick="ocultar_login_sign_up()">X</a>
           <h2>注册</h2>
-          <input type="text" placeholder="Email" />
-          <input type="text" placeholder="User" />
-          <input type="password" placeholder="Password" />
-          <input type="password" placeholder="Confirm Password" />
-          <button class="btn_sign_up" onclick="cambiar_sign_up()">注册</button>
+          <form>
+            <input type="text" name="phone" placeholder="Email" />
+            <input type="text" name="u" userplaceholder="User" />
+            <input type="password" name="password" placeholder="Password" />
+            <input type="password" placeholder="Confirm Password" />
+            <button class="btn_sign_up" onclick="cambiar_sign_up(phone.value,u.value,password.value)">注册</button>
+          </form>
         </div>
       </div>
     </div>
