@@ -64,9 +64,4 @@ public class StoreController {
         return "save";
     }
 
-    @RequestMapping("/register")
-    @ResponseBody
-    public void register(String json){
-        System.out.println(json);
-    }
 }

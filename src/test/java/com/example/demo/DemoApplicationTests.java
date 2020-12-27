@@ -19,12 +19,7 @@ class DemoApplicationTests {
     StoreDao storeDao;
     @Test
     void contextLoads() {
-        List<Store> list=storeDao.findByColumn("phone","1");
-        List<Store> l=new ArrayList<>();
-
-        l.add(list.get(0).setFid("1000"));
-        l.add(list.get(1).setFid("1001"));
-        storeDao.insertRows(l);
+        storeDao.findAll();
     }
 
 }
