@@ -1,0 +1,26 @@
+{
+	"code": 0,
+	"msg": "",
+	"count": 1000,
+	"data": [
+		{
+		"id": 10000,
+		"foodname": "麻辣烫",
+		"introdution": "好吃又好玩"
+		},
+		{
+			"id": 10000,
+			"foodname": "麻辣烫",
+			"introdution": "好吃又好玩"
+		},
+		{
+			"id": 10000,
+			"foodname": "麻辣烫",
+			"introdution": "好吃又好玩"
+		},
+		{
+			"id": 10000,
+			"foodname": "麻辣烫",
+			"introdution": "好吃又好玩"
+		}]
+}

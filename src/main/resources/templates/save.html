@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/layui/css/layui.css" th:href="@{/layui/css/layui.css}">
+</head>
+<body>
+    <form>
+        <fieldset>
+            <br>
+            <div class="layui-form-item">
+                <label class="layui-form-label">食物码</label>
+                <div class="layui-input-block">
+                    <input type="text" name="fid" class="layui-input" required  lay-verify="required" placeholder="请输入食物码" autocomplete="off">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">食物名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="fname" class="layui-input" required  lay-verify="required" placeholder="请输入食物名" autocomplete="off">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">电话</label>
+                <div class="layui-input-block">
+                    <input type="text" name="phone" class="layui-input" required  lay-verify="required" placeholder="请输入电话" autocomplete="on">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">地址</label>
+                <div class="layui-input-block">
+                    <input type="text" name="address" class="layui-input" required  lay-verify="required" placeholder="请输入地址" autocomplete="on">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">介绍</label>
+                <div class="layui-input-block">
+                    <input type="text" name="introduce" class="layui-input" required  lay-verify="required" placeholder="请输入介绍" autocomplete="on">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">图片</label>
+                <div class="layui-input-block">
+                    <input type="text" name="picture" class="layui-input" required  lay-verify="required" placeholder="请输入图片" autocomplete="on">
+                </div>
+            </div>
+            <div style="text-align:center"><button type="submit" class="layui-btn" onclick="addRow(fid.value,fname.value,phone.value,address.value,introduce.value,picture.value)"}>保存</button></div>
+        </fieldset>
+    </form>
+    <script src="../static/layui/layui.js" th:src="@{/layui/layui.js}"></script>
+    <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script>
+        function addRow(fid,name,phone,address,introduce,picture) {
+            var json=JSON.stringify({
+                'fid':fid,
+                'name':name,
+                'phone':phone,
+                'address':address,
+                'introduce':introduce,
+                'picture':picture
+            });
+            $.ajax({
+                url:'/addRow',
+                type:'post',
+                data:{
+                    'json':json
+                },
+                dataType:'text',
+                success:function (ret) {
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index); //再执行关闭
+                    layui.msg(ret);
+                },
+                error:function (ret) {
+                    layui.msg(ret);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

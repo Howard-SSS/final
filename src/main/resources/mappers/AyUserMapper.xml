@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.StoreDao">
+    <parameterMap id="storeParameterMap" type="com.example.demo.model.Store">
+        <parameter property="fid" jdbcType="VARCHAR"/>
+        <parameter property="name" jdbcType="VARCHAR"/>
+        <parameter property="phone" jdbcType="VARCHAR"/>
+        <parameter property="address" jdbcType="VARCHAR"/>
+        <parameter property="introduce" jdbcType="VARCHAR"/>
+        <parameter property="picture" jdbcType="VARCHAR"/>
+    </parameterMap>
+    <insert id="insertRow" parameterType="com.example.demo.model.Store">
+        insert into store (fid,name,phone,address,introduce,picture)
+        values (#{fid},#{name},#{phone},#{address},#{introduce},#{picture})
+    </insert>
+    <insert id="insertRows" parameterType="com.example.demo.model.Store">
+        insert into store (fid,name,phone,address,introduce,picture) values
+        <foreach collection="list" separator="," item="item">
+            (#{item.fid},#{item.name},#{item.phone},#{item.address},#{item.introduce},#{item.picture})
+        </foreach>
+
+    </insert>
+    <select id="findByColumns" resultType="com.example.demo.model.Store">
+        select * from store where ${column1} = #{value1} and ${column2} = #{value2}
+    </select>
+</mapper>
