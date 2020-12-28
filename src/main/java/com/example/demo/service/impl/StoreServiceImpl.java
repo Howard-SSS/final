@@ -57,8 +57,8 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public List<Store> findByColumns(String column1, String value1, String column2, String value2) {
-        return storeDao.findByColumns(column1,value1,column2,value2);
+    public List<Store> findByColumns(Store store) {
+        return storeDao.findByColumns(store);
     }
 
     @Override
@@ -67,7 +67,17 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
+    public void insertRows(List<Store> stores) {
+        storeDao.insertRows(stores);
+    }
+
+    @Override
     public void updateByFid(String fid,String column,String value) {
         storeDao.updateByFid(fid,column,value);
+    }
+
+    @Override
+    public void updateColumns(Store store) {
+        storeDao.updateColumns(store);
     }
 }

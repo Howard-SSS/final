@@ -16,7 +16,9 @@ public interface StoreService {
     long count();
     //mybatis
     List<Store> findByColumn(String column, String value);
-    List<Store> findByColumns(String column1,String value1,String column2,String value2);
+    List<Store> findByColumns(Store store);
     void insertRow(Store store);
+    void insertRows(List<Store> stores);
     void updateByFid(String fid,String column,String value);
+    void updateColumns(Store store);
 }

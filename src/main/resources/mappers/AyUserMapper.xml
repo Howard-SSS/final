@@ -21,7 +21,26 @@
         </foreach>
 
     </insert>
-    <select id="findByColumns" resultType="com.example.demo.model.Store">
-        select * from store where ${column1} = #{value1} and ${column2} = #{value2}
+    <select id="findByColumns" resultType="com.example.demo.model.Store" parameterType="com.example.demo.model.Store">
+        select * from store
+        <where>
+            <if test="fid != null">fid = #{fid}</if>
+            <if test="name != null">and name = #{name}</if>
+            <if test="phone != null">and phone = #{phone}</if>
+            <if test="address != null">and address = #{address}</if>
+            <if test="introduce != null">and introduce = #{introduce}</if>
+            <if test="picture != null">and picture = #{picture}</if>
+        </where>
     </select>
+    <update id="updateColumns" parameterType="com.example.demo.model.Store">
+        update store
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="introduce != null">introduce = #{introduce},</if>
+            <if test="picture != null">,picture = #{picture}</if>
+        </set>
+        where fid = #{fid}
+    </update>
 </mapper>

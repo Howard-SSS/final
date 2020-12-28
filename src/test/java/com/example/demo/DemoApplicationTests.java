@@ -19,7 +19,10 @@ class DemoApplicationTests {
     StoreDao storeDao;
     @Test
     void contextLoads() {
-        storeDao.findAll();
+        Store store=new Store();
+        store.setFid("1");
+        store.setPhone("2");
+        storeDao.updateColumns(store);
     }
 
 }

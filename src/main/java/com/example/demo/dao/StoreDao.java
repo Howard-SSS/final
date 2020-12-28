@@ -14,7 +14,7 @@ public interface StoreDao {
     @Select("select * from store where ${column} = #{value}")
     List<Store> findByColumn(@Param("column") String column, @Param("value") String value);
 
-    List<Store> findByColumns(@Param("column1") String column1,@Param("value1") String value1,@Param("column2") String column2,@Param("value2") String value2);
+    List<Store> findByColumns(Store store);
 
     void insertRow(Store store);
 
@@ -25,4 +25,6 @@ public interface StoreDao {
 
     @Update("update store set ${column} = #{value} where fid = #{fid}")
     void updateByFid(@Param("fid") String fid,@Param("column") String column,@Param("value") String value);
+
+    void updateColumns(Store store);
 }
