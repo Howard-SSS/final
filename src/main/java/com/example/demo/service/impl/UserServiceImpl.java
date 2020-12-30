@@ -1,7 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dao.UserDao;
-import com.example.demo.model.Store;
+import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import org.springframework.stereotype.Service;
 
@@ -13,18 +13,23 @@ public class UserServiceImpl implements UserService {
     @Resource
     UserDao UserDao;
     @Override
-    public List<Store> findAll() {
+    public List<User> findAll() {
         return UserDao.findAll();
     }
 
     @Override
-    public Store findByColumn(String column, String value) {
+    public List<User> findByColumn(String column, String value) {
         return UserDao.findByColumn(column,value);
     }
 
     @Override
-    public void insertRow(String phone, String name, String password) {
-        UserDao.insertUser(phone,name,password);
+    public List<User> findByColumns(User user) {
+        return UserDao.findByColumns(user);
+    }
+
+    @Override
+    public void insertRow(User user) {
+        UserDao.insertUser(user);
     }
 
     @Override

@@ -10,19 +10,19 @@ import javax.persistence.Table;
 @Table( name = "store")
 public class Store {
     @Id
-    private String fid;
+    private String sid;
     private String name;
     private String phone;
     private String address;
     private String introduce;
     private String picture;
 
-    public String getFid() {
-        return fid;
+    public String getSid() {
+        return sid;
     }
 
-    public Store setFid(String fid) {
-        this.fid = fid;
+    public Store setSid(String sid) {
+        this.sid = sid;
         return this;
     }
 
@@ -73,6 +73,6 @@ public class Store {
 
     @Override
     public String toString(){
-        return fid+" "+name+" "+phone+" "+address+" "+introduce+" "+picture;
+        return sid+" "+name+" "+phone+" "+address+" "+introduce+" "+picture;
     }
 }

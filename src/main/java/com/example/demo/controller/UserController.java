@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @RequestMapping("/toIndex")
-    public String toIndex(@RequestParam("index") int index,Model model){
+    public String toIndex(@RequestParam(value = "index",required = false,defaultValue = "0") int index,Model model){
         long num=storeService.count();
         long page= num/12+1;
         PageRequest pageRequest=PageRequest.of(index, 12);
@@ -43,14 +43,18 @@ public class UserController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public void login(){
-
+    public String login(String json){
+        User user= JSON.parseObject(json,User.class);
+        List<User> ret=userService.findByColumns(user);
+        if(ret.size()>0)
+            return "SUCCESS";
+        return "FAIL";
     }
 
     @RequestMapping("/register")
     @ResponseBody
     public void register(String json){
         User user= JSON.parseObject(json,User.class);
-        userService.insertRow(user.getPhone(),user.getName(),user.getPassword());
+        userService.insertRow(user);
     }
 }

@@ -7,8 +7,16 @@
         <parameter property="name" jdbcType="VARCHAR"/>
         <parameter property="password" jdbcType="VARCHAR"/>
     </parameterMap>
-    <insert id="insertUser" parameterType="String">
+    <insert id="insertUser" parameterType="com.example.demo.model.User">
         insert into user (phone,name,password)
         values (#{phone},#{name},#{password})
     </insert>
+    <select id="findByColumns" parameterType="com.example.demo.model.User" resultType="com.example.demo.model.User">
+        select * from user
+        <where>
+            <if test="phone != null">and phone = #{phone}</if>
+            <if test="name != null">and name = #{name}</if>
+            <if test="password != null">and password = #{password}</if>
+        </where>
+    </select>
 </mapper>

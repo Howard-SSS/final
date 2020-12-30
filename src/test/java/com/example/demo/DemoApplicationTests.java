@@ -1,7 +1,9 @@
 package com.example.demo;
 
 import com.example.demo.dao.StoreDao;
+import com.example.demo.dao.UserDao;
 import com.example.demo.model.Store;
+import com.example.demo.model.User;
 import com.example.demo.repository.StoreRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,15 +16,14 @@ import java.util.List;
 class DemoApplicationTests {
 
     @Resource
-    StoreRepository storeRepository;
-    @Resource
-    StoreDao storeDao;
+    UserDao userDao;
     @Test
     void contextLoads() {
-        Store store=new Store();
-        store.setFid("1");
-        store.setPhone("2");
-        storeDao.updateColumns(store);
+        User user=new User();
+        user.setName("123");
+        user.setPassword("123");
+        user.setPhone("123");
+        userDao.insertUser(user);
     }
 
 }

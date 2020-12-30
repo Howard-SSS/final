@@ -20,11 +20,11 @@ public interface StoreDao {
 
     void insertRows(List<Store> stores);
 
-    @Delete("delete from store where fid = #{fid}")
-    void deleteByFid(@Param("fid") String fid);
+    @Delete("delete from store where sid = #{sid}")
+    void deleteBySid(@Param("sid") String sid);
 
-    @Update("update store set ${column} = #{value} where fid = #{fid}")
-    void updateByFid(@Param("fid") String fid,@Param("column") String column,@Param("value") String value);
+    @Update("update store set ${column} = #{value} where sid = #{sid}")
+    void updateBySid(@Param("sid") String sid,@Param("column") String column,@Param("value") String value);
 
     void updateColumns(Store store);
 }

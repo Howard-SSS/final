@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -27,8 +28,8 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public void deleteById(String fid) {
-        storeRepository.deleteById(fid);
+    public void deleteById(String sid) {
+        storeRepository.deleteById(sid);
     }
 
     @Override
@@ -37,8 +38,8 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public boolean existsById(String fid) {
-        return storeRepository.existsById(fid);
+    public boolean existsById(String sid) {
+        return storeRepository.existsById(sid);
     }
 
     @Override
@@ -72,8 +73,8 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public void updateByFid(String fid,String column,String value) {
-        storeDao.updateByFid(fid,column,value);
+    public void updateBySid(String sid,String column,String value) {
+        storeDao.updateBySid(sid,column,value);
     }
 
     @Override

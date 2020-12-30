@@ -37,7 +37,7 @@ public class StoreController {
     public void deleteRows(String json){
         List<Store> list= JSON.parseArray(json,Store.class);
         for(int i=0;i<list.size();i++){
-            deleteByFid(list.get(i).getFid());
+            deleteByFid(list.get(i).getSid());
         }
     }
 
@@ -45,7 +45,7 @@ public class StoreController {
     @ResponseBody
     public String addRow(String json){
         Store store= JSONObject.parseObject(json,Store.class);
-        if(storeService.existsById(store.getFid())){
+        if(storeService.existsById(store.getSid())){
             return "is exists primaryKey";
         }
         storeService.save(store);

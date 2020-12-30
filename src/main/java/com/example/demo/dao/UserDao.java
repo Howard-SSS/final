@@ -1,6 +1,6 @@
 package com.example.demo.dao;
 
-import com.example.demo.model.Store;
+import com.example.demo.model.User;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -9,12 +9,14 @@ import java.util.List;
 public interface UserDao {
 
     @Select("select * from user")
-    List<Store> findAll();
+    List<User> findAll();
 
     @Select("select * from user where ${column} = #{value}")
-    Store findByColumn(@Param("column") String column, @Param("value") String value);
+    List<User> findByColumn(@Param("column") String column, @Param("value") String value);
 
-    void insertUser(@Param("phone") String phone,@Param("name") String name,@Param("password") String password);
+    List<User> findByColumns(User user);
+
+    void insertUser(User user);
 
     @Delete("delete from user where phone = #{phone}")
     void deleteByPhone(@Param("phone") String phone);

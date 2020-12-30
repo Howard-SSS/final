@@ -1,18 +1,18 @@
-function cambiar_login() {
-  document.querySelector('.cont_forms').className = "cont_forms cont_forms_active_login";  
-document.querySelector('.cont_form_login').style.display = "block";
-document.querySelector('.cont_form_sign_up').style.opacity = "0";               
-
-setTimeout(function(){  document.querySelector('.cont_form_login').style.opacity = "1"; },400);  
-  
-setTimeout(function(){    
-document.querySelector('.cont_form_sign_up').style.display = "none";
-},200);
-
-
+function toLog() {
+  document.querySelector('.cont_forms').className = "cont_forms cont_forms_active_login";
+  document.querySelector('.cont_form_login').style.display = "block";
+  document.querySelector('.cont_form_sign_up').style.opacity = "0";
+  setTimeout(function(){
+    document.querySelector('.cont_form_login').style.opacity = "1";
+  },400);
+  setTimeout(function(){
+    document.querySelector('.cont_form_sign_up').style.display = "none";
+  },200);
+}
+function cambiar_login(phone,password) {
   var json=JSON.stringify({
-    'apple':'a',
-    'ba':'b'
+    "phone":phone,
+    "password":password
   });
   $.ajax({
     url:'/login',
@@ -20,11 +20,17 @@ document.querySelector('.cont_form_sign_up').style.display = "none";
     data:{
       'json':json
     },
-    success:function () {
-
+    resultType:'text',
+    success:function (ret) {
+      if(ret == 'SUCCESS') {
+        window.location.href = '/toIndex';
+      }
+      else if(ret == 'FAIL') {
+        layui.msg('错误');
+      }
     },
-    error:function () {
-
+    error:function (ret) {
+      layui.msg('登录失败');
     }
   });
 
@@ -40,10 +46,11 @@ function toReg() {
   setTimeout(function(){   document.querySelector('.cont_form_login').style.display = "none";
   },400);
 }
-function cambiar_sign_up(phone,user,password) {
+
+function cambiar_sign_up(phone,name,password) {
   var json=JSON.stringify({
     "phone":phone,
-    "user":user,
+    "name":name,
     "password":password
   });
   $.ajax({
@@ -56,7 +63,7 @@ function cambiar_sign_up(phone,user,password) {
       console.log(123);
     },
     error:function () {
-
+      console.log(456);
     }
   });
 }    

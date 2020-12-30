@@ -9,9 +9,9 @@ import java.util.List;
 public interface StoreService {
     //jpa
     List<Store> findAll();
-    void deleteById(String fid);
+    void deleteById(String sid);
     void save(Store store);
-    boolean existsById(String fid);
+    boolean existsById(String sid);
     Page<Store> findAll(Pageable pageable);
     long count();
     //mybatis
@@ -19,6 +19,6 @@ public interface StoreService {
     List<Store> findByColumns(Store store);
     void insertRow(Store store);
     void insertRows(List<Store> stores);
-    void updateByFid(String fid,String column,String value);
+    void updateBySid(String sid,String column,String value);
     void updateColumns(Store store);
 }
