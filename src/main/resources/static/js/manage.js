@@ -16,7 +16,7 @@ layui.use('table', function(){
         ,height:600
         ,cols: [[
             {type: 'checkbox', fixed: 'left'}
-            ,{field: 'fid', title: '商店码', sort: true}
+            ,{field: 'sid', title: '商店码', sort: true}
             ,{field: 'name', title: '商店名'}
             ,{field: 'phone', title: '电话'}
             ,{field: 'address', title: '地址'}
@@ -50,13 +50,13 @@ layui.use('table', function(){
                     url:'/deleteRows',
                     type:'post',
                     data:{
-                        'json':json
+                        json:json
                     },
                     success:function () {
-                        layui.msg('成功');
+                        layer.msg('成功');
                     },
                     error:function () {
-                        layui.msg('错误');
+                        layer.msg('错误');
                     }
                 });
                 break;
@@ -76,15 +76,15 @@ layui.use('table', function(){
                     url:'/deleteRow',
                     type:'post',
                     data:{
-                        fid:data.fid
+                        sid:data.sid
                     },
                     success:function () {
                         obj.del();
                         layer.close(index);
-                        layui.msg('删除成功');
+                        layer.msg('删除成功');
                     },
                     error:function () {
-                        layui.msg('错误');
+                        layer.msg('错误');
                     }
                 });
             });

@@ -10,11 +10,11 @@
         <parameter property="introduce" jdbcType="VARCHAR"/>
         <parameter property="picture" jdbcType="VARCHAR"/>
     </parameterMap>
-    <insert id="insertRow" parameterType="com.example.demo.model.Store">
+    <insert id="insertStore" parameterType="com.example.demo.model.Store">
         insert into store (sid,name,phone,address,introduce,picture)
         values (#{sid},#{name},#{phone},#{address},#{introduce},#{picture})
     </insert>
-    <insert id="insertRows" parameterType="com.example.demo.model.Store">
+    <insert id="insertStores" parameterType="com.example.demo.model.Store">
         insert into store (sid,name,phone,address,introduce,picture) values
         <foreach collection="list" separator="," item="item">
             (#{item.sid},#{item.name},#{item.phone},#{item.address},#{item.introduce},#{item.picture})

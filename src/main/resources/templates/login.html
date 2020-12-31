@@ -37,7 +37,7 @@
         <div class="cont_form_login">
           <a href="#" onclick="ocultar_login_sign_up()" >X</a>
           <h2>登录</h2>
-          <form>
+          <form method="post">
             <input type="text" name="phone" placeholder="Phone" />
             <input type="password" name="password" placeholder="Password" />
             <button class="btn_login" onclick="cambiar_login(phone.value,password.value)">登录</button>
@@ -45,7 +45,7 @@
         </div>
         <div class="cont_form_sign_up"> <a href="#" onclick="ocultar_login_sign_up()">X</a>
           <h2>注册</h2>
-          <form>
+          <form method="post">
             <input type="text" name="phone" placeholder="Phone" />
             <input type="text" name="username" userplaceholder="User" />
             <input type="password" name="password" placeholder="Password" />

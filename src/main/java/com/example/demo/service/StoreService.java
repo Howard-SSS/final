@@ -17,8 +17,8 @@ public interface StoreService {
     //mybatis
     List<Store> findByColumn(String column, String value);
     List<Store> findByColumns(Store store);
-    void insertRow(Store store);
-    void insertRows(List<Store> stores);
+    void insertStore(Store store);
+    void insertStores(List<Store> stores);
     void updateBySid(String sid,String column,String value);
     void updateColumns(Store store);
 }

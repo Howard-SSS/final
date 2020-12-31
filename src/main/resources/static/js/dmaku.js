@@ -22,15 +22,16 @@ function cambiar_login(phone,password) {
     },
     resultType:'text',
     success:function (ret) {
-      if(ret == 'SUCCESS') {
+      if(ret == 'administrator') {
+        window.location.href = '/toManage';
+      }
+      else if(ret == 'common') {
         window.location.href = '/toIndex';
-      }
-      else if(ret == 'FAIL') {
-        layui.msg('错误');
-      }
+      }else
+        layer.msg('错误')
     },
     error:function (ret) {
-      layui.msg('登录失败');
+      layer.msg('登录失败');
     }
   });
 

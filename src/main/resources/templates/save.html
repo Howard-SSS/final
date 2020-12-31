@@ -12,13 +12,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">食物码</label>
                 <div class="layui-input-block">
-                    <input type="text" name="fid" class="layui-input" required  lay-verify="required" placeholder="请输入食物码" autocomplete="off">
+                    <input type="text" name="sid" class="layui-input" required  lay-verify="required" placeholder="请输入食物码" autocomplete="off">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">食物名</label>
                 <div class="layui-input-block">
-                    <input type="text" name="fname" class="layui-input" required  lay-verify="required" placeholder="请输入食物名" autocomplete="off">
+                    <input type="text" name="sname" class="layui-input" required  lay-verify="required" placeholder="请输入食物名" autocomplete="off">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -41,27 +41,52 @@
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">图片</label>
-                <div class="layui-input-block">
-                    <input type="text" name="picture" class="layui-input" required  lay-verify="required" placeholder="请输入图片" autocomplete="on">
+                <div class="layui-upload-drag" id="image">
+                    <i class="layui-icon"></i>
+                    <p>点击上传，或将文件拖拽到此处</p>
+                    <div class="layui-hide" id="uploadDemoView">
+                        <hr>
+                        <img src="" alt="上传成功后渲染" style="max-width: 196px">
+                    </div>
                 </div>
             </div>
-            <div style="text-align:center"><button type="submit" class="layui-btn" onclick="addRow(fid.value,fname.value,phone.value,address.value,introduce.value,picture.value)"}>保存</button></div>
+            <div style="text-align:center"><button id="click" type="submit" class="layui-btn" onclick="addRow(sid.value,sname.value,phone.value,address.value,introduce.value)"}>保存</button></div>
         </fieldset>
     </form>
     <script src="../static/layui/layui.js" th:src="@{/layui/layui.js}"></script>
     <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
     <script>
-        function addRow(fid,name,phone,address,introduce,picture) {
+        var filename;
+        layui.use('upload',function () {
+            var upload = layui.upload;
+            //拖拽上传
+            upload.render({
+                elem: '#image'
+                ,url: '/upload' //改成您自己的上传接口
+                ,accept: 'images'
+                ,bindAction: '#click'
+                ,done: function(res){
+                    layer.msg('上传成功');
+                    layui.$('#uploadDemoView').removeClass('layui-hide').find('img').attr('src',res.path);
+                    filename='ok.jpg';
+                    console.log(res);
+                }
+                ,error: function (res) {
+                    layer.msg('错误');
+                }
+            });
+        });
+        function addRow(sid,name,phone,address,introduce) {
             var json=JSON.stringify({
-                'fid':fid,
+                'sid':sid,
                 'name':name,
                 'phone':phone,
                 'address':address,
                 'introduce':introduce,
-                'picture':picture
+                'picture':filename
             });
             $.ajax({
-                url:'/addRow',
+                url:'/addStore',
                 type:'post',
                 data:{
                     'json':json
@@ -70,10 +95,10 @@
                 success:function (ret) {
                     var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                     parent.layer.close(index); //再执行关闭
-                    layui.msg(ret);
+                    layer.msg(ret);
                 },
                 error:function (ret) {
-                    layui.msg(ret);
+                    layer.msg(ret);
                 }
             });
         }

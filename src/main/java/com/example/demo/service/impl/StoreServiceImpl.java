@@ -2,14 +2,10 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dao.StoreDao;
 import com.example.demo.model.Store;
-//import com.example.demo.repository.StoreRepository;
 import com.example.demo.repository.StoreRepository;
 import com.example.demo.service.StoreService;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -63,13 +59,13 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public void insertRow(Store store) {
-        storeDao.insertRow(store);
+    public void insertStore(Store store) {
+        storeDao.insertStore(store);
     }
 
     @Override
-    public void insertRows(List<Store> stores) {
-        storeDao.insertRows(stores);
+    public void insertStores(List<Store> stores) {
+        storeDao.insertStores(stores);
     }
 
     @Override

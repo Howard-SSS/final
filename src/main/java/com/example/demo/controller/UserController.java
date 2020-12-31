@@ -7,8 +7,6 @@ import com.example.demo.service.StoreService;
 import com.example.demo.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,9 +44,11 @@ public class UserController {
     public String login(String json){
         User user= JSON.parseObject(json,User.class);
         List<User> ret=userService.findByColumns(user);
-        if(ret.size()>0)
-            return "SUCCESS";
-        return "FAIL";
+        if(ret.size()<0)
+            return "fail";
+        else if(ret.get(0).getName().equals("administrator"))
+            return "administrator";
+        return "common";
     }
 
     @RequestMapping("/register")

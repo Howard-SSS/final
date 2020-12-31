@@ -16,9 +16,9 @@ public interface StoreDao {
 
     List<Store> findByColumns(Store store);
 
-    void insertRow(Store store);
+    void insertStore(Store store);
 
-    void insertRows(List<Store> stores);
+    void insertStores(List<Store> stores);
 
     @Delete("delete from store where sid = #{sid}")
     void deleteBySid(@Param("sid") String sid);
