@@ -1,11 +1,8 @@
-var tdata;
-var t1;
 layui.use('table', function(){
     var table = layui.table;
-    t1=table;
-    table.render({
+    var t1=table.render({
         elem: '#test'
-        ,data:tdata
+        ,data:null
         ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
         ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
             title: '提示'
@@ -35,7 +32,7 @@ layui.use('table', function(){
             case 'getAdd':
                 layer.open({
                     type: 2 //iframe层类型
-                    ,area: ['700px', '400px']
+                    ,area: ['700px', '550px']
                     ,title: '请输入信息'
                     ,shade: 0.6 //遮罩透明度
                     ,maxmin: false //允许全屏最小化
@@ -63,7 +60,9 @@ layui.use('table', function(){
             case 'getSel':
                 layer.alert(JSON.stringify(cdata));
             case 'import':
-                layer.alert(JSON.stringify(cdata));
+                t1.reload({
+                    data: null
+                });
         };
     });
 
@@ -89,31 +88,39 @@ layui.use('table', function(){
                 });
             });
         } else if(obj.event === 'edit'){
-            layer.prompt({
-                formType: 2
-                ,value: data.email
-            }, function(value, index){
-                obj.update({
-                    email: value
-                });
-                layer.close(index);
+            layer.open({
+                type: 2 //iframe层类型
+                ,area: ['700px', '550px']
+                ,title: '请修改信息'
+                ,shade: 0.6 //遮罩透明度
+                ,maxmin: false //允许全屏最小化
+                ,anim: 1 //0-6的动画形式，-1不开启
+                ,content:'http://localhost:8080/edit?'+
+                    'sid='+data.sid+
+                    '&name='+data.name+
+                    '&phone='+data.phone+
+                    '&address='+data.address+
+                    '&introduce='+data.introduce+
+                    '&picture='+data.picture
+
             });
         }
     });
-});
-load();
-function load(){
-    $.ajax({
-        url:'/loadData',
-        type:'post',
-        data:null,
-        dataType:'json',
-        success:function (obj) {
-            tdata=obj;
-            t1.reload();
-        },
-        error:function (obj) {
+    load();
+    function load(){
+        $.ajax({
+            url:'/loadData',
+            type:'post',
+            data:null,
+            dataType:'json',
+            success:function (obj) {
+                t1.reload({
+                    data: obj
+                });
+            },
+            error:function (obj) {
 
-        }
-    });
-}
+            }
+        });
+    }
+});

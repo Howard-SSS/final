@@ -4,8 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.model.Store;
 import com.example.demo.service.StoreService;
-import org.hibernate.sql.OracleJoinFragment;
-import org.springframework.jmx.export.annotation.ManagedResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -35,7 +32,11 @@ public class StoreController {
     public String  toSavePage(Model model){
         return "save";
     }
-
+    @RequestMapping("/edit")
+    public String  toEditPage(String sid,String name,String phone,String address,String introduce,String picture,Model model){
+        model.addAttribute("sid",sid).addAttribute("name",name).addAttribute("phone",phone).addAttribute("address",address).addAttribute("introduce",introduce).addAttribute("picture",picture);
+        return "edit";
+    }
     @RequestMapping("/loadData")
     @ResponseBody
     public List<Store> load(){
@@ -73,7 +74,13 @@ public class StoreController {
         File f=new File("E:/移动应用开发/Bitmap/"+file.getOriginalFilename());
         file.transferTo(f);
         Map map = new HashMap<String, Object>();
-        map.put("path",f.getPath());
+        map.put("path",file.getOriginalFilename());
         return map;
+    }
+
+    @RequestMapping("/updateRow")
+    @ResponseBody
+    public void updateRow(Store store){
+        storeService.updateColumns(store);
     }
 }

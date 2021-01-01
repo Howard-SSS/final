@@ -10,13 +10,13 @@
         <fieldset>
             <br>
             <div class="layui-form-item">
-                <label class="layui-form-label">食物码</label>
+                <label class="layui-form-label">商店码</label>
                 <div class="layui-input-block">
                     <input type="text" name="sid" class="layui-input" required  lay-verify="required" placeholder="请输入食物码" autocomplete="off">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">食物名</label>
+                <label class="layui-form-label">商店名</label>
                 <div class="layui-input-block">
                     <input type="text" name="sname" class="layui-input" required  lay-verify="required" placeholder="请输入食物名" autocomplete="off">
                 </div>
@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <div style="text-align:center"><button id="click" type="submit" class="layui-btn" onclick="addRow(sid.value,sname.value,phone.value,address.value,introduce.value)"}>保存</button></div>
+            <div style="text-align:center"><button id="click" type="submit" class="layui-btn" onclick="addStore(sid.value,sname.value,phone.value,address.value,introduce.value)"}>保存</button></div>
         </fieldset>
     </form>
     <script src="../static/layui/layui.js" th:src="@{/layui/layui.js}"></script>
@@ -66,17 +66,18 @@
                 ,accept: 'images'
                 ,bindAction: '#click'
                 ,done: function(res){
+                    layui.$('#uploadDemoView').removeClass('layui-hide').find('img').attr('src','/images/'+res.path);
+                    layui.$('#image').find('i').addClass('layui-hide');
+                    layui.$('#image').find('p').addClass('layui.hide');
+                    filename=res.path;
                     layer.msg('上传成功');
-                    layui.$('#uploadDemoView').removeClass('layui-hide').find('img').attr('src',res.path);
-                    filename='ok.jpg';
-                    console.log(res);
                 }
                 ,error: function (res) {
                     layer.msg('错误');
                 }
             });
         });
-        function addRow(sid,name,phone,address,introduce) {
+        function addStore(sid,name,phone,address,introduce) {
             var json=JSON.stringify({
                 'sid':sid,
                 'name':name,
