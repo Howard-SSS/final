@@ -45,8 +45,8 @@ public class StoreController {
 
     @RequestMapping("/deleteRow")
     @ResponseBody
-    public void deleteByFid(String fid){
-        storeService.deleteById(fid);
+    public void deleteBySid(String sid){
+        storeService.deleteById(sid);
     }
 
     @RequestMapping("/deleteRows")
@@ -54,7 +54,7 @@ public class StoreController {
     public void deleteRows(String json){
         List<Store> list= JSON.parseArray(json,Store.class);
         for(int i=0;i<list.size();i++){
-            deleteByFid(list.get(i).getSid());
+            deleteBySid(list.get(i).getSid());
         }
     }
 
@@ -80,7 +80,8 @@ public class StoreController {
 
     @RequestMapping("/updateRow")
     @ResponseBody
-    public void updateRow(Store store){
+    public void updateRow(String json){
+        Store store= JSONObject.parseObject(json,Store.class);
         storeService.updateColumns(store);
     }
 }

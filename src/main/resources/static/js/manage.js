@@ -59,10 +59,9 @@ layui.use('table', function(){
                 break;
             case 'getSel':
                 layer.alert(JSON.stringify(cdata));
+                break;
             case 'import':
-                t1.reload({
-                    data: null
-                });
+                break;
         };
     });
 
@@ -75,7 +74,7 @@ layui.use('table', function(){
                     url:'/deleteRow',
                     type:'post',
                     data:{
-                        sid:data.sid
+                        'sid':data.sid
                     },
                     success:function () {
                         obj.del();

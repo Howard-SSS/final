@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @RequestMapping("/toIndex")
-    public String toIndex(@RequestParam(value = "index",required = false,defaultValue = "0") int index,Model model){
+    public String toIndex(@RequestParam(value = "index",required = false,defaultValue = "0") int index, Model model){
         long num=storeService.count();
         long page= num/12+1;
         PageRequest pageRequest=PageRequest.of(index, 12);
